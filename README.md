@@ -3,7 +3,7 @@
 > Project must be imported under {GO_SRC_DIR}/github.com/ditoking (eg: `~/go/src/github.com/ditoking`)
 
 ### To run local:
-####Go is a dependency, and this project uses ***go modules*** to handle package dependencies.
+#### Go is a dependency, and this project uses ***go modules*** to handle package dependencies.
 > Please run (from project root) `go mod vendor` in order to get all dependencies in a local vendor dir.
 > 
 > To run the app, please run (from project root) `cd ./cmd/website-visitor-stats && go build . && go run main.go`
@@ -15,3 +15,16 @@
 
 ### To run tests:
 `go clean -testcache && go test ./...`
+
+#### Endpoints:
+> - POST TO `<SOME_HOST>/v1/website-visitor-stats/new-interaction`
+> 
+> `
+> {
+	"user_uid": "<SOME_ID>",
+	"page_url": "<SOME_URL>"
+}
+> `
+> 
+> 
+> - GET TO `<SOME_HOST>/v1/website-visitor-stats/page-unique-visitors-count?page_url=<SOME_URL>`
