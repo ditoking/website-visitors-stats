@@ -29,19 +29,20 @@ func (e Engine) IncrementByKey(key string, incrementValue int) error {
 	_, found := e.cacheSrv.Get(key)
 
 	if !found {
-		e.cacheSrv.SetDefault(key, int64(incrementValue))
+		e.cacheSrv.SetDefault(key, incrementValue)
 		return nil
 	} else {
-		return e.cacheSrv.Increment(key, int64(incrementValue))
+		_, err := e.cacheSrv.IncrementInt(key, incrementValue)
+		return err
 	}
 }
 
-func (e Engine) GetIntValueByKey(key string) int64 {
+func (e Engine) GetIntValueByKey(key string) int {
 	value, found := e.cacheSrv.Get(key)
 
 	if !found {
 		return 0
 	}
 
-	return value.(int64)
+	return value.(int)
 }
