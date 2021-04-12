@@ -5,9 +5,10 @@ import (
 	cacheService "github.com/ditoking/website-visitors-stats/services/cache"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"os"
 	"time"
 )
+
+const HttpPort = 8080
 
 type Router struct {
 	ginEngine *gin.Engine
@@ -28,12 +29,8 @@ func (r Router) StartListeningAndServe() error {
 }
 
 func (r Router) start() error {
-	httpPort, exists := os.LookupEnv("HTTP_PORT")
-	if !exists {
-		httpPort = "8080"
-	}
 	s := &http.Server{
-		Addr:           fmt.Sprintf(":%s", httpPort),
+		Addr:           fmt.Sprintf(":%d", HttpPort),
 		Handler:        r.ginEngine,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,

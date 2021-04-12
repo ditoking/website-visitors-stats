@@ -4,7 +4,6 @@ import (
 	cacheService "github.com/ditoking/website-visitors-stats/services/cache"
 	"github.com/ditoking/website-visitors-stats/services/http_server"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"github.com/patrickmn/go-cache"
 	"log"
 	"time"
@@ -18,10 +17,6 @@ var (
 )
 
 func init() {
-	if err := godotenv.Load("cmd/website-visitor-stats/.env"); err != nil {
-		log.Fatalf("error getting env variables: %s", err.Error())
-	}
-
 	initCache()
 	initGin()
 
